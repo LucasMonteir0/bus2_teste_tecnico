@@ -1,3 +1,4 @@
+import "package:bus2_teste_tecnico/data/models/user/user_model.dart";
 import "package:equatable/equatable.dart";
 
 import "../../../core/errors/http_errors.dart";
@@ -13,8 +14,8 @@ class FetchRandomUserLoadingState implements RandomUserState {
   bool get stringify => false;
 }
 
-class FetchRandomUserSuccessState<T> implements RandomUserState {
-  final T data;
+class FetchRandomUserSuccessState implements RandomUserState {
+  final UserModel data;
 
   const FetchRandomUserSuccessState(this.data);
 
