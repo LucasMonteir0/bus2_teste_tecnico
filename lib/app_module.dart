@@ -2,6 +2,7 @@ import 'package:bus2_teste_tecnico/core/clients/http/app_http_client.dart';
 import 'package:bus2_teste_tecnico/core/clients/http/app_http_client_impl.dart';
 import 'package:bus2_teste_tecnico/data/repositories/random_user/random_user_repository.dart';
 import 'package:bus2_teste_tecnico/data/repositories/random_user/random_user_respository_impl.dart';
+import 'package:bus2_teste_tecnico/ui/viewmodels/random_user/random_user_cubit.dart';
 import 'package:bus2_teste_tecnico/ui/views/details/details_view.dart';
 import 'package:bus2_teste_tecnico/ui/views/home/home_view.dart';
 import 'package:dio/dio.dart';
@@ -19,6 +20,7 @@ class AppModule extends Module {
     Bind.factory<RandomUserRepository>((i) => RandomUserRepositoryImpl(i())),
 
     // Cubits
+    Bind.factory<RandomUserCubit>((i) => RandomUserCubit(i())),
   ];
 
   @override
