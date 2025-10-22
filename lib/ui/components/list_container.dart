@@ -10,15 +10,18 @@ class ListContainer extends StatelessWidget {
     final primaryColor = Theme.of(context).primaryColor;
     final screenWidth = MediaQuery.of(context).size.width;
     return Container(
-      width: double.infinity,
-      padding: EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: primaryColor.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(screenWidth * 0.08),
-        ),
-      ),
-      child: child,
-    ).animate().slideY(begin: 0.4, end: 0).fadeIn();
+          width: double.infinity,
+          padding: EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: primaryColor.withValues(alpha: 0.1),
+            borderRadius: BorderRadius.vertical(
+              top: Radius.circular(screenWidth * 0.08),
+            ),
+          ),
+          child: child,
+        )
+        .animate()
+        .slideY(begin: 0.4, end: 0)
+        .fadeIn(duration: Duration(milliseconds: 600));
   }
 }

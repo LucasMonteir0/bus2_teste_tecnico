@@ -14,7 +14,7 @@ class DatabaseUsersRepositoryImpl implements DatabaseUsersRepository {
   }
 
   @override
-  Future<ResultWrapper<List<UserModel>>> getAllUsers() {
+  Future<ResultWrapper<List<UserModel>>> fetchUsers() {
     return client.getAllUsers();
   }
 

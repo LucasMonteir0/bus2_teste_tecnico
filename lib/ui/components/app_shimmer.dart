@@ -19,8 +19,9 @@ class AppShimmer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final primaryColor = Theme.of(context).primaryColor;
     return Shimmer.fromColors(
-      baseColor: Colors.grey.shade300,
+      baseColor: primaryColor.withValues(alpha: 0.4),
       highlightColor: Colors.grey.shade100,
       child: SizedBox(
         height: _size ?? height ?? double.infinity,

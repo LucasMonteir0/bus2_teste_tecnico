@@ -5,7 +5,7 @@ import '../../models/user/user_model.dart';
 abstract class DatabaseUsersRepository {
   Future<ResultWrapper<bool>> saveUser(UserModel user);
 
-  Future<ResultWrapper<List<UserModel>>> getAllUsers();
+  Future<ResultWrapper<List<UserModel>>> fetchUsers();
 
   Future<ResultWrapper<bool>> clearUsers();
 }

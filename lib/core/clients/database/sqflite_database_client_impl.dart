@@ -12,9 +12,9 @@ class SqfliteDatabaseClientImpl implements DatabaseClient {
 
   SqfliteDatabaseClientImpl();
 
-  Database _getDb() {
+  Future<Database> _getDb() async {
     if (_db == null) {
-      throw Exception('Database not initialized. Call init() before using.');
+      await init();
     }
     return _db!;
   }
@@ -24,13 +24,9 @@ class SqfliteDatabaseClientImpl implements DatabaseClient {
     if (_db != null) {
       return;
     }
-    _db = await _initDB();
-  }
-
-  Future<Database> _initDB() async {
     final dbPath = await getDatabasesPath();
     final path = join(dbPath, 'users_database.db');
-    return await openDatabase(path, version: 1, onCreate: _onCreate);
+    _db = await openDatabase(path, version: 1, onCreate: _onCreate);
   }
 
   Future<void> _onCreate(Database db, int version) async {
@@ -51,7 +47,7 @@ class SqfliteDatabaseClientImpl implements DatabaseClient {
   @override
   Future<ResultWrapper<bool>> saveUser(UserModel user) async {
     try {
-      final db = _getDb();
+      final db = await _getDb();
 
       await db.insert(
         _tableName,
@@ -70,7 +66,7 @@ class SqfliteDatabaseClientImpl implements DatabaseClient {
   @override
   Future<ResultWrapper<List<UserModel>>> getAllUsers() async {
     try {
-      final db = _getDb();
+      final db = await _getDb();
       final List<Map<String, dynamic>> maps = await db.query(_tableName);
 
       final users = List<UserModel>.from(
@@ -88,7 +84,7 @@ class SqfliteDatabaseClientImpl implements DatabaseClient {
   @override
   Future<ResultWrapper<bool>> clearUsers() async {
     try {
-      final db = _getDb();
+      final db = await _getDb();
       await db.delete(_tableName);
 
       return ResultWrapper.success(true);

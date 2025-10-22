@@ -1,5 +1,6 @@
 import 'package:bus2_teste_tecnico/core/helpers/snack_helper.dart';
 import 'package:bus2_teste_tecnico/core/routes.dart';
+import 'package:bus2_teste_tecnico/ui/viewmodels/database_users/database_users_cubit.dart';
 import 'package:bus2_teste_tecnico/ui/viewmodels/random_user/random_user_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,12 +21,14 @@ class HomeView extends StatefulWidget {
 
 class _HomeViewState extends State<HomeView> {
   late final RandomUserCubit _cubit;
+  late final DatabaseUsersCubit _databaseUsersCubit;
   late final ValueNotifier<List<UserModel>> _usersNotifier;
 
   @override
   void initState() {
     super.initState();
     _cubit = Modular.get<RandomUserCubit>();
+    _databaseUsersCubit = Modular.get<DatabaseUsersCubit>();
     _usersNotifier = ValueNotifier<List<UserModel>>([]);
   }
 
@@ -48,6 +51,7 @@ class _HomeViewState extends State<HomeView> {
       listener: (context, state) {
         if (state is FetchRandomUserSuccessState) {
           _usersNotifier.value = [state.data, ..._usersNotifier.value];
+          _databaseUsersCubit.saveUser(state.data);
         }
         if (state is FetchRandomUserErrorState) {
           SnackHelper.showError(
