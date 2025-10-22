@@ -12,9 +12,11 @@ class UserModel extends Equatable {
   final DateOfBirthModel dob;
   final String phone;
   final String cell;
+  final String uuid;
   final UserPicturesModel picture;
 
   const UserModel({
+    required this.uuid,
     required this.name,
     required this.location,
     required this.email,
@@ -37,6 +39,7 @@ class UserModel extends Equatable {
       picture: UserPicturesModel.fromJson(
         json['picture'] as Map<String, dynamic>,
       ),
+      uuid: json['login']['uuid'] as String,
     );
   }
 
@@ -49,6 +52,7 @@ class UserModel extends Equatable {
       'phone': phone,
       'cell': cell,
       'picture': picture.toJson(),
+      'login': {'uuid': uuid},
     };
   }
 

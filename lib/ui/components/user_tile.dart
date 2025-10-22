@@ -19,9 +19,12 @@ class UserTile extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: ListTile(
-            leading: AppNetworkImage.circle(
-              imageUrl: user.picture.thumbnail,
-              size: 50,
+            leading: Hero(
+              tag: 'picture_${user.uuid}',
+              child: AppNetworkImage.circle(
+                imageUrl: user.picture.thumbnail,
+                size: 50,
+              ),
             ),
             title: Text(
               '${user.name.first} ${user.name.last}',

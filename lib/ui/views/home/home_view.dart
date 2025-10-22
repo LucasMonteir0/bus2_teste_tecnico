@@ -60,6 +60,7 @@ class _HomeViewState extends State<HomeView> {
                         "Buscar usuário: ",
                         style: textTheme.headlineSmall?.copyWith(
                           fontWeight: FontWeight.w500,
+                          color: Colors.grey.shade900,
                         ),
                       ),
                     ),

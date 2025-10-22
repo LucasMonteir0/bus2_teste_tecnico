@@ -1,3 +1,4 @@
+import 'package:bus2_teste_tecnico/ui/components/list_container.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
@@ -13,17 +14,7 @@ class UsersListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final primaryColor = Theme.of(context).primaryColor;
-    return Container(
-      width: double.infinity,
-      padding: EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: primaryColor.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.vertical(
-          top: Radius.circular(screenWidth * 0.08),
-        ),
-      ),
+    return ListContainer(
       child: ListView.separated(
         itemCount: users.isEmpty ? 1 : users.length,
         padding: EdgeInsets.zero,
