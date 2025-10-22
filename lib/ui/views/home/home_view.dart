@@ -1,7 +1,10 @@
+import 'package:bus2_teste_tecnico/core/helpers/snack_helper.dart';
+import 'package:bus2_teste_tecnico/core/routes.dart';
 import 'package:bus2_teste_tecnico/ui/viewmodels/random_user/random_user_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:material_symbols_icons/symbols.dart';
 
 import '../../../data/models/user/user_model.dart';
 import '../../components/ticker_component.dart';
@@ -39,11 +42,18 @@ class _HomeViewState extends State<HomeView> {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final primaryColor = Theme.of(context).colorScheme.primary;
     return BlocListener<RandomUserCubit, RandomUserState>(
       bloc: _cubit,
       listener: (context, state) {
         if (state is FetchRandomUserSuccessState) {
           _usersNotifier.value = [state.data, ..._usersNotifier.value];
+        }
+        if (state is FetchRandomUserErrorState) {
+          SnackHelper.showError(
+            context: context,
+            message: "Erro ao buscar usuário. (${state.error.code})",
+          );
         }
       },
       child: Scaffold(
@@ -78,6 +88,11 @@ class _HomeViewState extends State<HomeView> {
               ),
             ),
           ],
+        ),
+        floatingActionButton: FloatingActionButton(
+          backgroundColor: primaryColor,
+          onPressed: () => Modular.to.pushNamed(Routes.databaseUsers),
+          child: const Icon(Symbols.database, color: Colors.white),
         ),
       ),
     );

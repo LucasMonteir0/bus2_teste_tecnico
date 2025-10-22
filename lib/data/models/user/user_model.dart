@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:equatable/equatable.dart';
 
 import 'date_of_birh_model.dart';
@@ -55,6 +57,32 @@ class UserModel extends Equatable {
       'login': {'uuid': uuid},
     };
   }
+
+  factory UserModel.fromSqfliteJson(Map<String, dynamic> map) {
+    final Map<String, dynamic> rehydratedMap = {
+      'email': map['email'],
+      'phone': map['phone'],
+      'cell': map['cell'],
+      'login': {'uuid': map['uuid']},
+      'name': jsonDecode(map['name']),
+      'location': jsonDecode(map['location']),
+      'dob': jsonDecode(map['dob']),
+      'picture': jsonDecode(map['picture']),
+    };
+
+    return UserModel.fromJson(rehydratedMap);
+  }
+
+  Map<String, dynamic> toSqfliteJson() => {
+    'uuid': uuid,
+    'email': email,
+    'phone': phone,
+    'cell': cell,
+    'name': jsonEncode(name.toJson()),
+    'location': jsonEncode(location.toJson()),
+    'dob': jsonEncode(dob.toJson()),
+    'picture': jsonEncode(picture.toJson()),
+  };
 
   @override
   List<Object?> get props {

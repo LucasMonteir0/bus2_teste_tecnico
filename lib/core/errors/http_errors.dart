@@ -1,4 +1,4 @@
-import '../../data/models/base_error.dart';
+import 'base_error.dart';
 
 class NotFoundError extends BaseError {
   NotFoundError({super.message = "NotFoundError"}) : super(code: 404);

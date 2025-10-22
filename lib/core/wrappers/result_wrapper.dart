@@ -1,4 +1,4 @@
-import '../../data/models/base_error.dart';
+import '../errors/base_error.dart';
 
 class ResultWrapper<T> {
   final bool success;

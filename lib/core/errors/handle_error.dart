@@ -1,4 +1,4 @@
-import "../../data/models/base_error.dart";
+import "base_error.dart";
 import "http_errors.dart";
 
 BaseError handleError(int? statusCode, {String message = "An error occurred"}) {

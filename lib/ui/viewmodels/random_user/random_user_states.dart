@@ -1,8 +1,8 @@
 import "package:bus2_teste_tecnico/data/models/user/user_model.dart";
 import "package:equatable/equatable.dart";
 
+import "../../../core/errors/base_error.dart";
 import "../../../core/errors/http_errors.dart";
-import "../../../data/models/base_error.dart";
 
 sealed class RandomUserState extends Equatable {}
 

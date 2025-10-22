@@ -2,9 +2,9 @@ import "package:dio/dio.dart";
 import "package:flutter/foundation.dart";
 
 import "../../../core/errors/handle_error.dart";
-import "../../../data/models/http.dart";
 import "../../wrappers/result_wrapper.dart";
 import "app_http_client.dart";
+import "http.dart";
 
 class AppHttpClientImpl extends AppHttpClient {
   final Dio _dio;
