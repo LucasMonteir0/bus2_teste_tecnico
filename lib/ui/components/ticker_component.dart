@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/scheduler.dart';
+import 'package:flutter_modular/flutter_modular.dart';
+
+import '../../core/helpers/ticker_helper.dart';
 
 class TickerComponent extends StatefulWidget {
   final VoidCallback onTick;
@@ -17,52 +19,53 @@ class TickerComponent extends StatefulWidget {
 }
 
 class _TickerComponentState extends State<TickerComponent>
-    with SingleTickerProviderStateMixin {
-  late Ticker _ticker;
-  Duration _elapsed = Duration.zero;
-  int _processedIntervals = 0;
+    with SingleTickerProviderStateMixin, RouteAware {
+  late final RouteObserver<ModalRoute<void>> _routeObserver;
+  ModalRoute<void>? _route;
+  late final TickerHelper _helper;
 
   @override
   void initState() {
     super.initState();
-    _ticker = createTicker(_onTickerTick);
-    _ticker.start();
+    _routeObserver = Modular.get<RouteObserver<ModalRoute<void>>>();
+    _helper = TickerHelper(
+      vsync: this,
+      onTick: widget.onTick,
+      duration: widget.duration,
+      onUpdate: () {
+        if (mounted) {
+          setState(() {});
+        }
+      },
+    );
+
+    _helper.start();
   }
 
-  void _onTickerTick(Duration elapsedTime) {
-    setState(() {
-      _elapsed = elapsedTime;
-    });
-
-    final int intervalsPassed =
-        (_elapsed.inMilliseconds / widget.duration.inMilliseconds).floor();
-
-    if (intervalsPassed > _processedIntervals) {
-      widget.onTick();
-
-      _processedIntervals = intervalsPassed;
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _route = ModalRoute.of(context);
+    if (_route != null) {
+      _routeObserver.subscribe(this, _route!);
     }
   }
 
   @override
   void dispose() {
-    _ticker.stop();
-    _ticker.dispose();
+    if (_route != null) {
+      _routeObserver.unsubscribe(this);
+    }
+    _helper.dispose();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final double lastIntervalTimeMs =
-        (_processedIntervals * widget.duration.inMilliseconds).toDouble();
-    final double timeInCurrentIntervalMs =
-        _elapsed.inMilliseconds - lastIntervalTimeMs;
-    final double progress =
-        timeInCurrentIntervalMs / widget.duration.inMilliseconds;
     return Stack(
       children: [
         CircularProgressIndicator(
-          value: progress.clamp(0.0, 1.0),
+          value: _helper.progress,
           strokeWidth: 2,
         ),
         Positioned.fill(
@@ -73,5 +76,15 @@ class _TickerComponentState extends State<TickerComponent>
         ),
       ],
     );
+  }
+
+  @override
+  void didPushNext() {
+    _helper.pause();
+  }
+
+  @override
+  void didPopNext() {
+    _helper.resume();
   }
 }

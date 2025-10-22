@@ -31,13 +31,19 @@ class _HomeViewState extends State<HomeView> {
   }
 
   @override
+  void dispose() {
+    _usersNotifier.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     return BlocListener<RandomUserCubit, RandomUserState>(
       bloc: _cubit,
       listener: (context, state) {
         if (state is FetchRandomUserSuccessState) {
-          _usersNotifier.value = [..._usersNotifier.value, state.data];
+          _usersNotifier.value = [state.data, ..._usersNotifier.value];
         }
       },
       child: Scaffold(
@@ -66,7 +72,7 @@ class _HomeViewState extends State<HomeView> {
               child: ValueListenableBuilder(
                 valueListenable: _usersNotifier,
                 builder: (context, users, _) {
-                  return UsersListView(users: users, onUserTap: (user) {});
+                  return UsersListView(users: users);
                 },
               ),
             ),

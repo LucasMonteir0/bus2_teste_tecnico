@@ -8,6 +8,9 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final routeObserver = Modular.get<RouteObserver<ModalRoute<void>>>();
+
+    Modular.setObservers([routeObserver]);
     Modular.setInitialRoute(Routes.home);
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,

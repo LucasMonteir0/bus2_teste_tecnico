@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 
+import '../../core/routes.dart';
 import '../../data/models/user/user_model.dart';
+import '../views/user_details/user_details_view.dart';
 import 'user_tile.dart';
 
 class UsersListView extends StatelessWidget {
   final List<UserModel> users;
-  final void Function(UserModel user)? onUserTap;
 
-  const UsersListView({super.key, this.onUserTap, required this.users});
+  const UsersListView({super.key, required this.users});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +33,13 @@ class UsersListView extends StatelessWidget {
             return Center(child: Text('Nenhum usuário encontrado.'));
           }
           final user = users[index];
-          return UserTile(user: user, onUserTap: onUserTap);
+          return UserTile(
+            user: user,
+            onUserTap: (user) {
+              final params = UserDetailsViewParams(user: user);
+              Modular.to.pushNamed(Routes.userDetails, arguments: params);
+            },
+          );
         },
       ),
     );

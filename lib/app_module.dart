@@ -1,20 +1,24 @@
-import 'package:bus2_teste_tecnico/core/clients/http/app_http_client.dart';
-import 'package:bus2_teste_tecnico/core/clients/http/app_http_client_impl.dart';
-import 'package:bus2_teste_tecnico/data/repositories/random_user/random_user_repository.dart';
-import 'package:bus2_teste_tecnico/data/repositories/random_user/random_user_respository_impl.dart';
 import 'package:bus2_teste_tecnico/ui/viewmodels/random_user/random_user_cubit.dart';
-import 'package:bus2_teste_tecnico/ui/views/details/details_view.dart';
 import 'package:bus2_teste_tecnico/ui/views/home/home_view.dart';
+import 'package:bus2_teste_tecnico/ui/views/user_details/user_details_view.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
+import 'core/clients/http/app_http_client.dart';
+import 'core/clients/http/app_http_client_impl.dart';
 import 'core/routes.dart';
+import 'data/repositories/random_user/random_user_repository.dart';
+import 'data/repositories/random_user/random_user_respository_impl.dart';
 
 class AppModule extends Module {
   @override
   List<Bind<Object>> get binds => [
-    // Clients
+    // Others
     Bind.instance<AppHttpClient>(AppHttpClientImpl(Dio())),
+    Bind.singleton<RouteObserver<ModalRoute<void>>>(
+      (i) => RouteObserver<ModalRoute<void>>(),
+    ),
 
     // Repositories
     Bind.factory<RandomUserRepository>((i) => RandomUserRepositoryImpl(i())),
@@ -27,8 +31,8 @@ class AppModule extends Module {
   List<ModularRoute> get routes => [
     ChildRoute(Routes.home, child: (_, _) => HomeView()),
     ChildRoute(
-      Routes.details,
-      child: (_, args) => DetailsView(params: args.data),
+      Routes.userDetails,
+      child: (_, args) => UserDetailsView(params: args.data),
     ),
   ];
 }
