@@ -23,8 +23,7 @@ class UserLocationModel extends Equatable {
       city: json['city'] as String,
       state: json['state'] as String,
       country: json['country'] as String,
-      postcode: json['postcode']
-          .toString(), // Converte int ou String para String
+      postcode: json['postcode'].toString(),
     );
   }
 
