@@ -11,8 +11,8 @@ import 'data/repositories/database_users_repository/database_users_repository.da
 import 'data/repositories/database_users_repository/database_users_repository_impl.dart';
 import 'data/repositories/random_user/random_user_repository.dart';
 import 'data/repositories/random_user/random_user_respository_impl.dart';
-import 'ui/viewmodels/database_users/database_users_cubit.dart';
-import 'ui/viewmodels/random_user/random_user_cubit.dart';
+import 'ui/view_models/database_users/database_users_cubit.dart';
+import 'ui/view_models/random_user/random_user_cubit.dart';
 import 'ui/views/database/database_users_view.dart';
 import 'ui/views/home/home_view.dart';
 import 'ui/views/user_details/user_details_view.dart';

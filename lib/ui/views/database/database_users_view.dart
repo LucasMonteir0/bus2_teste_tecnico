@@ -5,8 +5,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
 
 import '../../components/users_list_view.dart';
-import '../../viewmodels/database_users/database_users.states.dart';
-import '../../viewmodels/database_users/database_users_cubit.dart';
+import '../../view_models/database_users/database_users.states.dart';
+import '../../view_models/database_users/database_users_cubit.dart';
 
 class DatabaseUsersView extends StatefulWidget {
   const DatabaseUsersView({super.key});

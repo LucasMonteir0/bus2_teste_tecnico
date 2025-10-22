@@ -1,5 +1,5 @@
 import 'package:bus2_teste_tecnico/data/repositories/database_users_repository/database_users_repository.dart';
-import 'package:bus2_teste_tecnico/ui/viewmodels/database_users/database_users.states.dart';
+import 'package:bus2_teste_tecnico/ui/view_models/database_users/database_users.states.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class DatabaseUsersCubit extends Cubit<DatabaseUsersState> {

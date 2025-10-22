@@ -1,7 +1,7 @@
 import 'package:bus2_teste_tecnico/core/helpers/snack_helper.dart';
 import 'package:bus2_teste_tecnico/core/routes.dart';
-import 'package:bus2_teste_tecnico/ui/viewmodels/database_users/database_users_cubit.dart';
-import 'package:bus2_teste_tecnico/ui/viewmodels/random_user/random_user_cubit.dart';
+import 'package:bus2_teste_tecnico/ui/view_models/database_users/database_users_cubit.dart';
+import 'package:bus2_teste_tecnico/ui/view_models/random_user/random_user_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_modular/flutter_modular.dart';
@@ -10,7 +10,7 @@ import 'package:material_symbols_icons/symbols.dart';
 import '../../../data/models/user/user_model.dart';
 import '../../components/ticker_component.dart';
 import '../../components/users_list_view.dart';
-import '../../viewmodels/random_user/random_user_states.dart';
+import '../../view_models/random_user/random_user_states.dart';
 
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
