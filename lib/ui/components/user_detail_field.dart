@@ -44,6 +44,7 @@ class _UserDetailFieldState extends State<UserDetailField> {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final primaryColor = Theme.of(context).primaryColor;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -56,6 +57,8 @@ class _UserDetailFieldState extends State<UserDetailField> {
           enableInteractiveSelection: true,
           decoration: InputDecoration(
             prefixIcon: widget.icon != null ? Icon(widget.icon) : null,
+            filled: true,
+            fillColor: primaryColor.withValues(alpha: 0.1),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8.0),
             ),

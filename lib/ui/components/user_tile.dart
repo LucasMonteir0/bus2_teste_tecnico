@@ -5,14 +5,14 @@ import 'app_network_image.dart';
 
 class UserTile extends StatelessWidget {
   final UserModel user;
-  final bool hasHeroTag;
   final void Function(UserModel user)? onUserTap;
+  final String tag;
 
   const UserTile({
     super.key,
     required this.user,
     this.onUserTap,
-    required this.hasHeroTag,
+    required this.tag,
   });
 
   @override
@@ -26,7 +26,7 @@ class UserTile extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: ListTile(
             leading: Hero(
-              tag: hasHeroTag ? 'picture_${user.uuid}' : UniqueKey(),
+              tag: tag,
               child: AppNetworkImage.circle(
                 imageUrl: user.picture.thumbnail,
                 size: 50,

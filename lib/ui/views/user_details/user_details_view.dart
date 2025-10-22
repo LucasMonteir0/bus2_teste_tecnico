@@ -9,8 +9,9 @@ import '../../components/user_detail_field.dart';
 
 class UserDetailsViewParams {
   final UserModel user;
+  final String tag;
 
-  UserDetailsViewParams({required this.user});
+  UserDetailsViewParams({required this.user, required this.tag});
 }
 
 class UserDetailsView extends StatelessWidget {
@@ -22,6 +23,7 @@ class UserDetailsView extends StatelessWidget {
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
     final surfaceColor = Theme.of(context).colorScheme.surface;
+
     return Scaffold(
       appBar: AppBar(
         scrolledUnderElevation: 0,
@@ -39,7 +41,7 @@ class UserDetailsView extends StatelessWidget {
         child: Column(
           children: [
             Hero(
-              tag: 'picture_${params.user.uuid}',
+              tag: params.tag,
               child: AppNetworkImage.circle(
                 imageUrl: params.user.picture.large,
                 size: 120,

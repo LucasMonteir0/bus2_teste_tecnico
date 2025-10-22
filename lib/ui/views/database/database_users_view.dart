@@ -52,7 +52,7 @@ class _DatabaseUsersViewState extends State<DatabaseUsersView> {
 
           return UsersListView(
             users: users,
-            hasHeroTag: false,
+            tag: 'picture-database-',
             isLoading: state is FetchDatabaseUsersLoadingState,
             isError: state is FetchDatabaseUsersErrorState,
           );

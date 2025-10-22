@@ -10,16 +10,16 @@ import 'user_tile.dart';
 
 class UsersListView extends StatelessWidget {
   final List<UserModel> users;
+  final String tag;
   final bool isLoading;
   final bool isError;
-  final bool hasHeroTag;
 
   const UsersListView({
     super.key,
     required this.users,
-    this.hasHeroTag = true,
     this.isLoading = false,
     this.isError = false,
+    required this.tag,
   });
 
   @override
@@ -42,11 +42,15 @@ class UsersListView extends StatelessWidget {
                 return Center(child: Text('Nenhum usuário encontrado.'));
               }
               final user = users[index];
+              final heroTag = tag + user.uuid;
               return UserTile(
                 user: user,
-                hasHeroTag: hasHeroTag,
+                tag: heroTag,
                 onUserTap: (user) {
-                  final params = UserDetailsViewParams(user: user);
+                  final params = UserDetailsViewParams(
+                    user: user,
+                    tag: heroTag,
+                  );
                   Modular.to.pushNamed(Routes.userDetails, arguments: params);
                 },
               );

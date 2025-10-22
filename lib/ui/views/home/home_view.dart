@@ -87,7 +87,7 @@ class _HomeViewState extends State<HomeView> {
               child: ValueListenableBuilder(
                 valueListenable: _usersNotifier,
                 builder: (context, users, _) {
-                  return UsersListView(users: users);
+                  return UsersListView(users: users, tag: 'picture-');
                 },
               ),
             ),
